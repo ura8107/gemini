@@ -13,6 +13,7 @@
 \usetheme{gemini}
 \usecolortheme{gemini}
 \usepackage{graphicx}
+\usepackage{subcaption}
 \usepackage{booktabs}
 \usepackage{tikz}
 \usepackage{pgfplots}
@@ -49,9 +50,9 @@
 % ====================
 
 \footercontent{
-  \href{https://www.example.com}{https://www.example.com} \hfill
+  Agreeing to Disagree? \hfill
   JSQPS 2026 Summer, Tokyo \hfill
-  \href{mailto:alyssa.p.hacker@example.com}{alyssa.p.hacker@example.com}}
+  \href{https://ura8107.github.io}{Yuki Matsuura}}
 % (can be left out to remove footer)
 
 % ====================
@@ -76,9 +77,7 @@
 
   \begin{block}{Introduction}
 
-    How was the nonproliferation agreement formed? Attempts to control the spread of nuclear weapons were stories of both success and failure. But one of the greatest success is the creation of Nonproliferation Treaty (NPT). 
-
-    Still, we lack emperical evidence on how the deal was achieved. Since nonproliferation issue is bundled with security, technology and even national pride, understanding how consensus/compromise were made is important.
+    How was the nonproliferation agreement formed? Attempts to control the spread of nuclear weapons were stories of both success and failure. But one of the greatest success is the creation of \textbf{Nonproliferation Treaty (NPT)}. 
 
   \end{block}
 
@@ -98,24 +97,11 @@
 
   \begin{block}{Theory}
     
-    I argue that one overarching goal bridges the disagrements over sub-issue dimensions. In other words, single agreement is hard without common cause among participants. 
+    I argue that one overarching goal bridges the disagrements over sub-issue dimensions. In other words, single agreement is hard without common cause among participants. The case of nonproliferation regime clearly fits into this: countries can generally agree on the importance of nonproliferation while discontents about some sub-issues had remained. 
 
-    The case of nonproliferation regime clearly fits into this: countries can generally agree on the importance of nonproliferation while discontents about some sub-issues had remained. 
+    Nonproliferation debates unfoled with a couple of playgrounds: \textbf{bloc dynamics} (East, West, Non-Aligned), and \textbf{nuclear possession} (NWS or not)
 
-    Nonproliferation debates unfoled with a couple of playgrounds:
-
-    \begin{enumerate}
-      \item confrontation among blocs
-      \item dichotomy of nuclear haves and have-nots
-    \end{enumerate}
-
-    Besides the need for nonproliferation, it entailed several sub-issues:
-
-    \begin{enumerate}
-      \item security concerns
-      \item technology control
-      \item normative aversion
-    \end{enumerate}
+    Besides the need for nonproliferation, it entailed several sub-issues: 1. \textbf{security concerns} for NNWS, 2. peaceful use of nuclear \textbf{technology}, and 3. \textbf{normative misgivings} over nonproliferation regime. 
 
     I predict that while convergence on existential matters such as security or norms is improbable, countries can make compromise on general importance of the agenda and more technical aspects, leading to the \textit{prima facie} agreemtent.
 
@@ -136,41 +122,41 @@
         \item Eastern bloc: Soviet Union, Bulgaria, Czechoslovakia, Poland, Romania
         \item Non-aligned: Brazil, Burma, Ethiopia, India, Mexico, Nigeria, Sweden, United Arab Republic (UAR)
       \end{itemize}
-      \item Other countries were added subsequently but non included in the ENDC body.
     \end{itemize}
 
-    Digitized version is available at the University of Michigan Library (quod.lib.umich.edu).
-
-    Original text is historical document and original OCR quality was poor. So I used local LLM model (qwen3.5) to collect word misspellig and OCR errors. 
-
-    After that, I devide each meeting notes into speech components excluding chair speechs. Total number of speech was 1,643.
+    Digitized version is available at the University of Michigan Library (quod.lib.umich.edu). Original text is historical document and original OCR quality was poor. So I used local LLM model (qwen3.5) to collect word misspellig and OCR errors. After that, I devide each meeting notes into speech components excluding chair speechs. Total number of speech was 1,643.
 
     \end{alertblock}
     
-    While common way to deal with text data is natural language processing (NLP) because standardized analysis allows us to replicate and compare results easily, LLMs are able to handle complex tasks such as reading and understanding long text corpus, and summarizing and annotating concepts, scale, or scores. In this study, I employ both methods to complement each other's strengh and drawbacks. 
+    NLP mostly relies ono pre-specified topics or keywords, while LLM allows more "human-like" interpretation of complext texts. Thus, I employ both methods to complement each other.
 
     \begin{alertblock}{Methods}
       \heading{NLP}
 
-      To understand the overall alignment among participants, I use wordfish \parencite{Slapin2008-gs}. After deciding which keywords/concepts to choose, I apply ALC word embedding by \texttt{conText} package \parencite{Rodriguez2023-cg}. The results are validated with \texttt{keyATM} \parencite{Eshima2024-dm}.
+      To understand the overall alignment among participants, I use wordfish \parencite{Slapin2008-gs} to see overall ideological landscape of participants.
+
+      Next, we look at issue dimensions. From domain knowledge of nonproliferation literature, I set three topics: security, technology, and norms, with three distinct keywords respectively (hence, 3 by 3 structure). After deciding which keywords/concepts to choose, I apply ALC word embedding by \texttt{conText} package \parencite{Rodriguez2023-cg}. The results are validated with \texttt{keyATM} \parencite{Eshima2024-dm}.
 
       \heading{LLMs}
 
-      I delegate two annnotation tasks to LLMs:
+      I delegate two annnotation tasks to LLMs (qwen3.5, balancing quality and computational resource):
 
       \begin{enumerate}
-        \item Rate the overall content of a speech with blind eyes
-        \item Rate three issue dimensions of nonproliferation debates
+        \item Rate the overall content of a speech with blind eyes (task 1)
+        \item Rate three issue dimensions of nonproliferation debates (task 2)
       \end{enumerate}
 
-      Outputs from both tasks are Likert scale from 1 to 5.
+      Zero-shot prompt for task 1 is: "On the scale of 1 to 5, rate the overall attitude tone of the speech. 1=negative toward the orientation of the meetings, strong disagreement with other speakers. 3=more or less neutral, some disagreement remains, but agree on core principles and eager to move forward. 5=strongly in favor of nuclear control, either by leading the conference discourse or following other speakers' initiatives. " Almost same structure is used for task 2.
 
-      \begin{figure}
-        \includegraphics{../output/positions/plots/wordfish_correlation.png}
-        \caption{Correlations of wordfish score with UNGA ideal points and LLM annotations}
-      \end{figure}
+      That Likert scale is simply summed and averaged as this is the most natural way of interpretation \parencite{Benoit2026-re}.
 
     \end{alertblock}
+
+    \begin{figure}
+      \includegraphics{../output/positions/plots/wordfish_correlation.png}
+      \caption{Correlations of wordfish score with UNGA ideal points and LLM annotations}
+      \label{corr}
+    \end{figure}
 
   \end{block}
 
@@ -182,13 +168,7 @@
 
   \begin{block}{Results}
 
-    Wordfish results in figure \ref{wordfish} tell that block level difference is salient, esp for East bloc. But it also gives a (probably) false sense of West-Nonaligned agreements on nonproliferation matters. 
-    
-    \begin{figure}
-      \includegraphics{../output/wordfish/plots/wordfish_country_positions.png}
-      \caption{ENDC ideological positions by wordfish}
-      \label{wordfish}
-    \end{figure}
+    Results in figure \ref{corr} tell that block level difference is salient, esp for East bloc. Wordfish shows resemblance with UNGA ideal point and LLM scores more closely align with it. But this alone also gives a (probably) false sense of West-Nonaligned convergence on nonproliferation matters. 
 
     Next, we turn to NLP methods anchored on semantically important word. Figure \ref{context} display the aggregated difference among two fault lines (NWS or not, and bloc), temporal norm beta hat differences about 3 words from 3 dimensions.
 
@@ -206,6 +186,22 @@
       \label{keyatm}
     \end{figure}
 
+    LLM annotations present more clear results as expected; countries generally agreed on technology issue but conflicted about security and normative dimensions (Figure \ref{llm}). This gap narrowed as NPT is signed but never disapeared. 
+
+    \begin{figure}[htbp]
+      \centering
+      \begin{minipage}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{../output/positions/ss_issue_dims_country.png}
+        \subcaption{Country level diff on 3 dimensions}
+      \end{minipage}
+      \begin{minipage}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{../output/positions/ss_issue_dims_temporal.png}
+        \subcaption{Temporal diff on 3 dimensions}
+      \end{minipage}
+      \caption{Results from LLM annotation by Qwen 3.5}
+      \label{llm}
+    \end{figure}
+
   \end{block}
 
   \begin{block}{Implication}
@@ -215,10 +211,6 @@
       \item Emperically validated that NPT is fraught with seeds of disagreements since its conception.
       \begin{itemize}
         \item Current crisis should not be understood with pessimism only.
-      \end{itemize}
-      \item Future IR must take advantage of NLP/LLM with historical texts to facilitate research.
-      \begin{itemize}
-        \item Diplomacy entails euphemism and tropes, so it must adapt to such domain specific languages.
       \end{itemize}
     \end{itemize}
 
